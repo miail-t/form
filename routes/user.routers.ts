@@ -15,7 +15,7 @@ router.put('/phonenumber',
     cors(),
     auth,
     [
-        //check('phonenumber','Некорректный номер телефона').isMobilePhone()
+        check('phoneNumber','Некорректный номер телефона').isMobilePhone('ru-RU')
     ],
     async (req: any, res: express.Response) => {
         try {
@@ -58,7 +58,6 @@ router.delete('/phonenumber',
     cors(),
     auth,
     [
-        //check('phonenumber','Некорректный номер телефона').isMobilePhone()
     ],
     async (req: any, res: express.Response) => {
         try {

@@ -10,7 +10,7 @@ module.exports = (req: any, res: any, next: any) => {
         const token = req.headers.authorization.split(' ')[1]
 
         if (!token) {
-            return res.status(401).json({massage: "ДИЧЬ"});
+            return res.status(401).json({massage: "Пользователь не авторизован"});
         }
 
         const decoded = jwt.verify(token, configure.get('jwtSecret'))
@@ -18,6 +18,6 @@ module.exports = (req: any, res: any, next: any) => {
         req.user = {...decoded, token};
         next();
     } catch (e) {
-        res.status(401).json({massage: "Мимо"});
+        res.status(401).json({massage: "Пользователь не авторизован"});
     }
 }

@@ -10,7 +10,7 @@ app.use(express.json({ extended: true }));
 app.use('/api/auth', require('./routes/auth.routers'));
 app.use('/api/profile', require('./routes/user.routers'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = 8087;
 
 async function start() {
     try {
