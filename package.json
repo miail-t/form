@@ -2,12 +2,13 @@
   "name": "test-task",
   "version": "1.0.0",
   "description": "backend for test task ",
-  "main": "index.js",
+  "main": "index.ts",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "start": "nodemon -e ts index.ts"
+    "start": "nodemon -e ts index.ts",
+    "server": "node index.ts"
   },
   "keywords": [],
   "author": "vpru",
