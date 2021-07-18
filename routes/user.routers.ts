@@ -32,10 +32,22 @@ router.put('/phonenumber',
             }
 
             const user = await User.findOne({_id: req.user.userId})
-            await user.updateOne({phoneNumber})
-            await user.save()
+            await user.set({"phoneNumber": phoneNumber})
+            await user.save();
 
-            res.status(200).json({massage: "Добавил номер"})
+            console.log(user)
+
+            res.status(200).json({
+                massage: "Номер успешно добавлен",
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    phoneNumber: user.phoneNumber,
+                    token: req.user.token
+                }
+            })
         } catch (e) {
             console.log(e)
             res.status(500).json({massage: 'Что-то пошло не так'})
@@ -50,11 +62,24 @@ router.delete('/phonenumber',
     ],
     async (req: any, res: express.Response) => {
         try {
-            const user = await User.findById(req.user.userId)
-            await user.update({}, {phoneNumber: ''})
-            console.log(user)
+            const user = await User.findOne({_id: req.user.userId})
+
+            if (!user.phoneNumber) {
+                return res.status(400).json({massage: "Номера не существует"})
+            }
+            await user.set({"phoneNumber": undefined})
+
             await user.save()
-            res.status(200).json({massage: "Номер удален"})
+            res.status(200).json({
+                massage: "Номер удален",
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    token: req.user.token
+                }
+            })
         } catch (e) {
             console.log(e)
             res.status(500).json({massage: 'Что-то пошло не так'})
