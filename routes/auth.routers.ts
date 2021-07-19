@@ -13,7 +13,7 @@ const myValidationResult = validationResult.withDefaults({
     formatter: ({msg}: any) => msg
 });
 
-router.post('/registeraon',
+router.post('/registration',
     cors(),
     [
         check('email', 'Некорректный e-mail').isEmail(),
